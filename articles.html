@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Viona Cornelia</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="assets/css/fontawesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@100;200;300;400;600;800;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>DTFrigg</h1>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./portfolio.html">Portfolio</a></li>
+                <li><a href="./articles.html">Articles</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-title">
+            <h2>Articles</h2>
+            <p>My Articles</p>
+        </div>
+        <div class="articles">
+            <p>Unfortunately, I don't have an article yet. So here <br>today's top 5 articles from dev.to:</p>
+            <section></section>
+        </div>
+
+        <script>
+            const section = document.querySelector("section");
+            (async function () {
+              const res = await fetch("https://dev.to/api/articles?page=1&per_page=5&top=1");
+              const data = await res.json();
+              data.forEach(({ title, description, url }, i) => {
+                section.innerHTML += /*html*/ `
+                  <article>
+                    ${i ? `<hr/>` : `<br/>`}
+                    <div>
+                      <a target="_blank" href="${url}"><h3>${title}</h3></a>
+                      <p>${description}</p>
+                    </div>
+                  </article>
+                `;
+              });
+            })();
+        </script>
+    </main>
+</body>
+</html>
